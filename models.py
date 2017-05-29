@@ -317,7 +317,7 @@ class regularNet(nn.Module):
         self.stop_ind = stop_ind
 
     def getInitHidden(self, batchSize):
-        return torch.zeros(1, batchSize, self.hiddenSize).cuda(), torch.zeros(1, batchSize, self.hiddenSize) .cuda()
+        return torch.zeros(batchSize, 1, self.hiddenSize).cuda(), torch.zeros(batchSize, 1, self.hiddenSize) .cuda()
 
     def forward(self, cnnFeats, fc_out, caption, targets, num_caps=None, sample=False):
         # caption is B*maxlen
@@ -443,7 +443,11 @@ class LayerNormLSTMCell(nn.Module):
     
     def forward(self, _input, hx):
         # input is of size - B*inp_size
-        h0, c0 = hx        
+        h0, c0 = hx
+        
+        if self.training is False and h0.dim() == 3:
+            h0, c0 = h0[:, 0, :], c0[:, 0, :]
+            
         # batch_size = _input.size(0)
         wh = torch.mm(h0, self.weight_hh)
         wi = torch.mm(_input, self.weight_ih)
@@ -478,4 +482,4 @@ class LayerNormLSTM(nn.Module):
             seq_lens = seq_lens.view(batch_size, 1, 1).expand(batch_size, 1, self.hidden_size)
             return outputs.gather(1, seq_lens).squeeze(1)
 
-        return outputs, None
+        return outputs, hx
