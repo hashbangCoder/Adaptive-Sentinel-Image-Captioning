@@ -1,5 +1,5 @@
 # Adaptive-Sentinel-Image-Captioning
-Implementation of the 'Knowing When to Look: Adaptive Attention via A Visual Sentinel for Image Captioning' by Lu et. al.
+Implementation of the [Knowing When to Look: Adaptive Attention via A Visual Sentinel for Image Captioning](https://arxiv.org/abs/1612.01887) by Lu et. al.
 
 Work in Progress. 
 
@@ -21,6 +21,5 @@ Work in Progress.
 
 Work in Progress. 
 
-=======
 # Adaptive-Sentinel-Image-Captioning
 Implementation of the 'Knowing When to Look: Adaptive Attention via A Visual Sentinel for Image Captioning' by Lu et. al.
